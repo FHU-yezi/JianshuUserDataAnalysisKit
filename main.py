@@ -46,6 +46,9 @@ def BasicDataGetter(start_id):
 
 def FullDataGetter(basic_data):
     result = basic_data
+    if result["uslug"] == None:
+        print_yellow("用户账号状态异常，已跳过")
+        return result
     result["url"] = "".join(["https://www.jianshu.com/u/", basic_data["uslug"]])
     
     user_page_html_obj = etree.HTML(requests.get(result["url"], headers=USER_PAGE_REQUEST_HEADER).content)
