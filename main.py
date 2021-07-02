@@ -67,9 +67,10 @@ def FullDataGetter(basic_data):
                                                                        "https://www.jianshu.com/asimov/users/slug/"), 
                                                  headers=USER_DATA_JSON_REQUEST_HEADER).content)
     result["gender"] = {
-        0: "未知", 
+        0: "未知（0）", 
         1: "男", 
-        2: "女"
+        2: "女", 
+        3: "未知（3）"
     }[user_data_json_obj["gender"]]
     result["followers_count"] = user_data_json_obj["following_users_count"]
     result["fans_count"] = user_data_json_obj["followers_count"]
