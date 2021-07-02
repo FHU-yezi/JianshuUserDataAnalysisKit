@@ -14,7 +14,7 @@ class UserData(Model):
     avatar_url = CharField(null=True)
     FP_count = FloatField(null=True)
     FTN_count = FloatField(null=True)
-    assets_count = IntegerField(null=True)
+    assets_count = FloatField(null=True)
     gender = IntegerField(null=True)
     followers_count = IntegerField(null=True)
     fans_count = IntegerField(null=True)
