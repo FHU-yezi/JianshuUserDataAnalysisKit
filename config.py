@@ -4,7 +4,7 @@ if TOTAL_DATA_COUNT % 20 != 0:
 DATABASE_NAME = "UserData.db"  # 数据库名称
 SIMPLE_DATA_REQUESTS_COUNT = int(TOTAL_DATA_COUNT / 20)
 SLEEP_TIME = 0.03
-REQUESTS_BEFORE_SAVE = 10  # 多少次数据保存一次
+REQUESTS_BEFORE_SAVE = 10  # 多少次数据获取保存一次
 
 USER_PAGE_REQUEST_HEADER = {
     "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36"
