@@ -83,7 +83,7 @@ def ProcessDataList(data_list):
     # 目前这个函数什么都不做
     return data_list
 
-FULL_DATA_COUNT = len(UserData.select(UserData))  # 获取基础数据总数
+FULL_DATA_COUNT = len(UserData)  # 获取基础数据总数
 print(f"请确认数据获取配置：\n数据库文件名为 {DATABASE_NAME} \n共获取 {FULL_DATA_COUNT} 条数据\n\
 等待时间为 {FULL_GETTER_SLEEP_TIME} 秒\n每 {FULL_DATA_FETCHES_BEFORE_SAVING} 条数据保存一次")
 
