@@ -1,7 +1,6 @@
 from peewee import (CharField, DateField, DateTimeField, FloatField,
                     IntegerField, Model, SqliteDatabase)
-
-from config import DATABASE_NAME
+from getter_config import DATABASE_NAME
 
 db = SqliteDatabase(DATABASE_NAME)
 
@@ -9,7 +8,7 @@ class UserData(Model):
     uid = IntegerField(primary_key=True, unique=True)
     uslug = CharField(unique=True, null=True)
     name = CharField(unique=True, null=True)
-    url = CharField(unique=True, null=True)
+    user_url = CharField(unique=True, null=True)
     ranking = IntegerField(unique=True, null=True)
     avatar_url = CharField(null=True)
     FP_count = FloatField(null=True)
