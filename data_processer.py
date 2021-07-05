@@ -78,3 +78,5 @@ with tqdm(total=TOTAL_DATA_COUNT) as bar:
         bar.update(1)
 
 print_green("全部数据处理完成！")
+db.close()
+print_green("数据库已正常关闭！")
