@@ -4,6 +4,7 @@ from time import sleep
 
 import requests
 from lxml import etree
+import JianshuResearchTools.basic_apis as jrtapis
 
 from db_config import UserData, db
 from getter_config import (DATABASE_NAME, FULL_DATA_FETCHES_BEFORE_SAVING,
@@ -33,25 +34,24 @@ def DataGetter(basic_data):
         print_yellow("用户账号状态异常，已跳过")
         return result
     result["user_url"] = "".join(["https://www.jianshu.com/u/", basic_data["uslug"]])
+
+    user_page_html_obj = jrtapis.GetUserPCHtmlDataApi(result["user_url"])
+    user_data_json_obj = jrtapis.GetUserJsonDataApi(result["user_url"])
     
-    user_page_html_obj = etree.HTML(requests.get(result["user_url"], headers=USER_PAGE_REQUEST_HEADER).content)
     if "您要找的页面不存在" in user_page_html_obj.xpath("//*/text()"):  # 用户账号状态异常
         print_yellow("用户账号状态异常，已跳过")
         return result
     try:
-        result["FTN_count"] = float(user_page_html_obj.xpath("//div[@class='info']/ul/li[6]/div[@class='meta-block']/p")[0].text
-                                    .replace(".", "").replace("w", "000"))
-        result["assets_count"] = round(abs(result["FP_count"] + result["FTN_count"]), 3)
-    except IndexError:
+        result["FP_count"] = user_data_json_obj["jsd_balance"] / 1000
+        result["FTN_count"] = abs(round(result["assets_count"] - result["FP_count"], 3))
+    except KeyError:
         print_yellow("获取用户资产失败，已跳过")
         
     result["badges"] = user_page_html_obj.xpath("//li[@class='badge-icon']/a/text()")
     result["badges"] = [item.replace(" ", "").replace("\n", "") for item in result["badges"]]  # 移除空格和换行符
     result["badges"] = [item for item in result["badges"] if item != ""]  # 去除空值
+    
     result["articles_count"] = int(user_page_html_obj.xpath("//div[@class='info']/ul/li[3]/div[@class='meta-block']/a/p")[0].text)
-    user_data_json_obj = json.loads(requests.get(result["user_url"].replace("https://www.jianshu.com/u/", 
-                                                                       "https://www.jianshu.com/asimov/users/slug/"), 
-                                                 headers=USER_JSON_DATA_REQUEST_HEADER).content)
     result["gender"] = {
         0: "未知（0）", 
         1: "男", 
