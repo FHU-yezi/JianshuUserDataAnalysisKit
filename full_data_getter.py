@@ -1,10 +1,8 @@
-import json
 from datetime import datetime
 from time import sleep
 
-import requests
-from lxml import etree
 import JianshuResearchTools.basic_apis as jrtapis
+from lxml import etree
 
 from db_config import UserData, db
 from getter_config import (DATABASE_NAME, FULL_DATA_FETCHES_BEFORE_SAVING,
