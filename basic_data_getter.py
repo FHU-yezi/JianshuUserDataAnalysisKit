@@ -31,7 +31,7 @@ def DataGetter(start_id):
 def ProcessDataList(data_list):
     for data in data_list:
         # JRT 问题，暂时避开
-        data["FP_count"] = data["FP"]
+        data["assets_count"] = data["FP"]
         del data["FP"]
     return data_list
 
