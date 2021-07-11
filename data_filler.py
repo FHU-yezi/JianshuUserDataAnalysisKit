@@ -1,5 +1,5 @@
 from copy import copy
-from JianshuResearchTools.user import GetUserArticlesInfo, GetUserFansInfo, GetUserFollowersInfo
+from JianshuResearchTools.user import GetUserArticlesInfo, GetUserFansInfo, GetUserFollowingInfo
 from print_with_color import print_green, print_red, print_yellow
 
 from db_config import UserData, db
@@ -36,7 +36,7 @@ def GetUserRealFollowersCount(user_url):
     page = 1
     result = 0
     while True:
-        data = GetUserFollowersInfo(user_url, page)
+        data = GetUserFollowingInfo(user_url, page)
         if data == []:
             break
         else:
