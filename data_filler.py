@@ -24,7 +24,10 @@ def GetUserRealArticlesCount(user_url):
     page = 1
     result = 0
     while True:
-        data = GetUserArticlesInfo(user_url, page, 500)
+        try:
+            data = GetUserArticlesInfo(user_url, page, 500)
+        except IndexError:
+            break
         if data == []:
             break
         else:
@@ -36,7 +39,10 @@ def GetUserRealFollowersCount(user_url):
     page = 1
     result = 0
     while True:
-        data = GetUserFollowingInfo(user_url, page)
+        try:
+            data = GetUserFollowingInfo(user_url, page)
+        except IndexError:
+            break
         if data == []:
             break
         else:
@@ -48,7 +54,10 @@ def GetUserRealFansCount(user_url):
     page = 1
     result = 0
     while True:
-        data = GetUserFansInfo(user_url, page)
+        try:
+            data = GetUserFansInfo(user_url, page)
+        except IndexError:
+            break
         if data == []:
             break
         else:
